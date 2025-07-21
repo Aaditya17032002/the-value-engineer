@@ -40,6 +40,22 @@ export default function HomePage() {
     return () => observer.disconnect()
   }, [])
 
+  const taglines = [
+    "We are selling peace of mind",
+    "Your Scope. Your Format. Your Timeline. We Estimate It All.",
+    "Your trade. Your workflow. Our expertise.",
+    "You Build. We Back You Up.",
+  ]
+
+  const [taglineIndex, setTaglineIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTaglineIndex((prev) => (prev + 1) % taglines.length);
+    }, 2600); // 1600ms for a slower, more readable animation
+    return () => clearInterval(interval);
+  }, [taglines.length]);
+
   const toggleVideo = () => {
     if (videoRef.current) {
       if (isVideoPlaying) {
@@ -50,13 +66,6 @@ export default function HomePage() {
       setIsVideoPlaying(!isVideoPlaying)
     }
   }
-
-  const taglines = [
-    "We are selling peace of mind",
-    "Your Scope. Your Format. Your Timeline. We Estimate It All.",
-    "Your trade. Your workflow. Our expertise.",
-    "You Build. We Back You Up.",
-  ]
 
   const advantages = [
     { icon: Target, title: "Custom Estimating Support", desc: "Designed to fit your workflow" },
@@ -167,19 +176,10 @@ export default function HomePage() {
               className="h-20 mb-12 flex items-center justify-center animate-fade-in-up"
               style={{ animationDelay: "0.6s" }}
             >
-              <div className="text-xl md:text-3xl text-gray-200 font-light max-w-4xl leading-relaxed">
-                {taglines.map((tagline, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 flex items-center justify-center transition-all duration-400 ${
-                      Math.floor(Date.now() / 800) % taglines.length === index
-                        ? "opacity-100 transform translate-y-0"
-                        : "opacity-0 transform translate-y-4"
-                    }`}
-                  >
-                    "{tagline}"
-                  </div>
-                ))}
+              <div className="text-xl md:text-3xl text-gray-200 font-light max-w-4xl leading-relaxed transition-all duration-400">
+                <div key={taglineIndex} className="transition-all duration-400 opacity-100 transform translate-y-0">
+                  "{taglines[taglineIndex]}"
+                </div>
               </div>
             </div>
 
