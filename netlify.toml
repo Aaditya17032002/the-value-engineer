@@ -1,0 +1,15 @@
+[build]
+  command = "bun run build"
+  publish = "out"
+  environment = { BUN_INSTALL = "bun i" }
+
+[build.environment]
+  NPM_FLAGS = "--ignore-scripts"
+
+[functions]
+  node_bundler = "esbuild"
+
+[build]
+  NODE_VERSION = "20"
+  BUN_VERSION = "latest"
+  BUN_INSTALL = "bun i" 
