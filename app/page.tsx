@@ -171,8 +171,8 @@ export default function HomePage() {
                 {taglines.map((tagline, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${
-                      Math.floor(Date.now() / 1800) % taglines.length === index
+                    className={`absolute inset-0 flex items-center justify-center transition-all duration-400 ${
+                      Math.floor(Date.now() / 800) % taglines.length === index
                         ? "opacity-100 transform translate-y-0"
                         : "opacity-0 transform translate-y-4"
                     }`}
