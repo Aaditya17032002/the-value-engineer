@@ -126,7 +126,7 @@ export default function HomePage() {
         <FaWhatsapp />
       </a>
       {/* Hero Section with Advanced Parallax */}
-      <section ref={heroRef} className="relative h-screen transition-all duration-700">
+      <section ref={heroRef} className="relative h-[70vh] sm:h-screen transition-all duration-700 flex items-center justify-center px-2 sm:px-0">
         <div className="absolute inset-0 will-change-transform" style={{ transform: `translateY(${scrollY * 0.5}px)` }}>
           <video ref={videoRef} autoPlay muted loop playsInline className="w-full h-full object-cover scale-110">
             <source src="/bg.mp4" type="video/mp4" />
@@ -151,18 +151,18 @@ export default function HomePage() {
         </div>
 
         {/* Hero Content with Staggered Animation */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-white px-6">
+        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full text-white px-2 sm:px-6">
           {/* Logo */}
-          <img src="/logo.png" alt="Logo" className="w-32 h-32 mb-6 mx-auto drop-shadow-xl rounded-full bg-white/80 p-2" />
-          <div className="max-w-6xl mx-auto text-center">
-            <div className="mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <Badge className="bg-blue-600/20 text-blue-200 border-blue-400/30 text-lg px-6 py-2 mb-6">
+          <img src="/logo.png" alt="Logo" className="w-20 h-20 sm:w-32 sm:h-32 mb-4 sm:mb-6 mx-auto drop-shadow-xl rounded-full bg-white/80 p-2" />
+          <div className="max-w-2xl sm:max-w-6xl mx-auto text-center">
+            <div className="mb-4 sm:mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+              <Badge className="bg-blue-600/20 text-blue-200 border-blue-400/30 text-base sm:text-lg px-4 sm:px-6 py-2 mb-4 sm:mb-6">
                 Trusted Worldwide • USA • Canada • UK • Australia
               </Badge>
             </div>
 
             <h1
-              className="text-6xl md:text-8xl font-black mb-8 leading-tight animate-fade-in-up"
+              className="text-3xl xs:text-4xl sm:text-6xl md:text-8xl font-black mb-4 sm:mb-8 leading-tight animate-fade-in-up"
               style={{ animationDelay: "0.4s" }}
             >
               <span className="inline bg-gradient-to-r from-white via-blue-200 to-white bg-clip-text text-transparent">
@@ -173,10 +173,10 @@ export default function HomePage() {
 
             {/* Rotating Taglines */}
             <div
-              className="h-20 mb-12 flex items-center justify-center animate-fade-in-up"
+              className="h-12 sm:h-20 mb-6 sm:mb-12 flex items-center justify-center animate-fade-in-up"
               style={{ animationDelay: "0.6s" }}
             >
-              <div className="text-xl md:text-3xl text-gray-200 font-light max-w-4xl leading-relaxed transition-all duration-400">
+              <div className="text-base xs:text-lg sm:text-3xl text-gray-200 font-light max-w-xs xs:max-w-xl sm:max-w-4xl leading-relaxed transition-all duration-400">
                 <div key={taglineIndex} className="transition-all duration-400 opacity-100 transform translate-y-0">
                   "{taglines[taglineIndex]}"
                 </div>
@@ -184,12 +184,12 @@ export default function HomePage() {
             </div>
 
             <div
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center animate-fade-in-up"
               style={{ animationDelay: "0.8s" }}
             >
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-12 py-6 text-xl font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 group"
+                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 group"
                 asChild
               >
                 <Link href="/contact">
@@ -202,7 +202,7 @@ export default function HomePage() {
                 variant="outline"
                 size="lg"
                 onClick={toggleVideo}
-                className="border-2 border-white/30 text-white hover:bg-white/10 px-12 py-6 text-xl font-bold rounded-full backdrop-blur-sm transition-all duration-300 bg-transparent"
+                className="w-full sm:w-auto border-2 border-white/30 text-white hover:bg-white/10 px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-bold rounded-full backdrop-blur-sm transition-all duration-300 bg-transparent"
               >
                 {isVideoPlaying ? <Pause className="mr-3 h-6 w-6" /> : <Play className="mr-3 h-6 w-6" />}
                 {isVideoPlaying ? "Pause" : "Play"}
