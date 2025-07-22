@@ -22,7 +22,7 @@ function Footer() {
         <div className="flex space-x-4 text-2xl">
           <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" className="hover:text-blue-400"><FaLinkedin /></a>
           <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter" className="hover:text-blue-400"><FaTwitter /></a>
-          <a href="https://wa.me/15551234567" target="_blank" rel="noopener" aria-label="WhatsApp" className="hover:text-green-400"><FaWhatsapp /></a>
+          <a href="https://wa.me/919687150213" target="_blank" rel="noopener" aria-label="WhatsApp" className="hover:text-green-400"><FaWhatsapp /></a>
           <a href="mailto:info@thevalueengineering.com" aria-label="Email" className="hover:text-blue-400"><FaEnvelope /></a>
         </div>
       </div>
@@ -33,7 +33,7 @@ function Footer() {
 function WhatsAppFloatingButton() {
   return (
     <a
-      href="https://wa.me/15551234567"
+      href="https://wa.me/919687150213"
       target="_blank"
       rel="noopener"
       className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center text-3xl"
