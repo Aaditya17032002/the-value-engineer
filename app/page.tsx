@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Play, Pause, Globe, Users, Award, Clock, Zap, Target } from "lucide-react"
+import { ArrowRight, Play, Pause, Globe, Users, Award, Clock, Zap, Target, MessageCircle } from "lucide-react"
 import Link from "next/link"
 import { FaWhatsapp } from "react-icons/fa"
 
@@ -79,11 +79,19 @@ export default function HomePage() {
   return (
     <div className="min-h-screen overflow-hidden relative">
       {/* Floating Feedback Button */}
+      {/* Show icon on mobile, full button on sm+ */}
       <button
-        className="fixed top-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg font-semibold transition-all duration-200"
+        className="fixed top-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg font-semibold transition-all duration-200 hidden sm:block"
         onClick={() => setShowFeedback(true)}
       >
         Leave Feedback
+      </button>
+      <button
+        className="fixed top-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-200 block sm:hidden"
+        onClick={() => setShowFeedback(true)}
+        aria-label="Leave Feedback"
+      >
+        <MessageCircle className="w-6 h-6" />
       </button>
       {/* Feedback Modal */}
       {showFeedback && (
