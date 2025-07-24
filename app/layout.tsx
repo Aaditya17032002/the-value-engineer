@@ -16,14 +16,17 @@ export const metadata: Metadata = {
 
 function Footer() {
   return (
-    <footer className="w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-6 ">
-      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="text-sm text-gray-300">© {new Date().getFullYear()} The Value Engineering. All rights reserved.</div>
+    <footer className="w-full relative overflow-hidden py-6">
+      {/* Dark Transparent Overlay - darker to match Who We Are section */}
+      <div className="absolute inset-0 bg-black/80 z-10"></div>
+      
+      <div className="container mx-auto px-6 relative z-20 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="text-sm text-gray-200">© {new Date().getFullYear()} The Value Engineering. All rights reserved.</div>
         <div className="flex space-x-4 text-2xl">
-          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" className="hover:text-blue-400"><FaLinkedin /></a>
-          <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter" className="hover:text-blue-400"><FaTwitter /></a>
-          <a href="https://wa.me/919687150213" target="_blank" rel="noopener" aria-label="WhatsApp" className="hover:text-green-400"><FaWhatsapp /></a>
-          <a href="mailto:info@thevalueengineering.com" aria-label="Email" className="hover:text-blue-400"><FaEnvelope /></a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" className="hover:text-blue-400 transition-colors"><FaLinkedin /></a>
+          <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter" className="hover:text-blue-400 transition-colors"><FaTwitter /></a>
+          <a href="https://wa.me/919687150213" target="_blank" rel="noopener" aria-label="WhatsApp" className="hover:text-green-400 transition-colors"><FaWhatsapp /></a>
+          <a href="mailto:info@thevalueengineering.com" aria-label="Email" className="hover:text-blue-400 transition-colors"><FaEnvelope /></a>
         </div>
       </div>
     </footer>

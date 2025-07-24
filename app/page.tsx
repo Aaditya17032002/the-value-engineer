@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Play, Pause, Globe, Users, Award, Clock, Zap, Target, MessageCircle } from "lucide-react"
 import Link from "next/link"
 import { FaWhatsapp } from "react-icons/fa"
+import SmoothFollower from "@/components/smooth-follower"
 
 export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null)
@@ -131,6 +132,9 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen overflow-hidden relative">
+      {/* Smooth Follower Cursor */}
+      <SmoothFollower />
+      
       {/* Floating Feedback Button */}
       {/* Show icon on mobile, full button on sm+ */}
       <button
@@ -339,25 +343,31 @@ export default function HomePage() {
         </div> */}
       </section>
 
-      {/* Who We Are Section with Advanced Animations */}
-      {/* Who We Are Section with Advanced Animations */}
+      {/* Who We Are Section with Static Background Video */}
       <section
         id="about"
         ref={aboutRef}
         className="py-32 relative overflow-hidden z-30"
-        style={{ background: 'linear-gradient(to bottom, #10151A 0%, #1e3a8a 100%)' }}
       >
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23000000' fillOpacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
+        {/* Static Background Video */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            style={{ filter: 'brightness(0.3) contrast(1.2)' }}
+          >
+            <source src="/bg.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
 
-        <div className="container mx-auto px-6 relative">
+        {/* Dark Transparent Overlay */}
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+
+        <div className="container mx-auto px-6 relative z-20">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div
@@ -393,7 +403,7 @@ export default function HomePage() {
                 <div className="mt-12 flex flex-col sm:flex-row gap-4">
                   <Button
                     size="lg"
-                    className="bg-slate-800 hover:bg-slate-900 text-[#52C5D0] px-8 py-4 text-lg font-semibold rounded-full group border border-[#52C5D0]"
+                    className="bg-slate-800/80 backdrop-blur-sm hover:bg-slate-900/90 text-[#52C5D0] px-8 py-4 text-lg font-semibold rounded-full group border border-[#52C5D0]"
                     asChild
                   >
                     <Link href="/about">
@@ -404,7 +414,7 @@ export default function HomePage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="border-2 border-[#52C5D0] text-[#52C5D0] hover:bg-[#10151A] px-8 py-4 text-lg font-semibold rounded-full bg-transparent"
+                    className="border-2 border-[#52C5D0] text-[#52C5D0] hover:bg-[#52C5D0]/10 px-8 py-4 text-lg font-semibold rounded-full bg-transparent backdrop-blur-sm"
                     asChild
                   >
                     <Link href="/services">View Services</Link>
@@ -428,7 +438,7 @@ export default function HomePage() {
                     ].map((stat, index) => (
                       <Card
                         key={index}
-                        className="bg-[#10151A]/80 backdrop-blur-sm border border-[#52C5D0] shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                        className="bg-black/40 backdrop-blur-md border border-[#52C5D0]/50 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
                         style={{ animationDelay: stat.delay }}
                       >
                         <CardContent className="p-8 text-center">
