@@ -15,6 +15,17 @@ export default function HomePage() {
   const [scrollY, setScrollY] = useState(0)
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
   const [showFeedback, setShowFeedback] = useState(false)
+  
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    testimonial: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [submitMessage, setSubmitMessage] = useState('')
 
   useEffect(() => {
     // No about section animation logic
@@ -63,6 +74,61 @@ export default function HomePage() {
     { icon: Award, title: "Accuracy You Can Count On", desc: "Every quantity is double-checked" },
   ]
 
+  // Form submission handler
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (!formData.name || !formData.email || !formData.testimonial) {
+      setSubmitStatus('error')
+      setSubmitMessage('Please fill in all required fields')
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    setSubmitMessage('')
+
+    try {
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        setSubmitMessage('Thank you! Your feedback has been submitted successfully.')
+        setFormData({ name: '', email: '', phone: '', testimonial: '' })
+        // Close modal after 2 seconds
+        setTimeout(() => {
+          setShowFeedback(false)
+          setSubmitStatus('idle')
+          setSubmitMessage('')
+        }, 2000)
+      } else {
+        setSubmitStatus('error')
+        setSubmitMessage(data.error || 'Failed to submit feedback. Please try again.')
+      }
+    } catch (error) {
+      setSubmitStatus('error')
+      setSubmitMessage('Network error. Please check your connection and try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
   return (
     <div className="min-h-screen overflow-hidden relative">
       {/* Floating Feedback Button */}
@@ -92,20 +158,81 @@ export default function HomePage() {
               ×
             </button>
             <h2 className="text-2xl font-bold mb-4 text-slate-800">Client Feedback</h2>
-            <form className="space-y-4">
+            
+            {/* Status Messages */}
+            {submitStatus === 'success' && (
+              <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+                {submitMessage}
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                {submitMessage}
+              </div>
+            )}
+            
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Name</label>
-                <input type="text" className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Name" />
+                <label className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
+                <input 
+                  type="text" 
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  placeholder="Your Name" 
+                  required
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                <input type="email" className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="you@email.com" />
+                <label className="block text-sm font-medium text-slate-700 mb-1">Email *</label>
+                <input 
+                  type="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  placeholder="you@email.com" 
+                  required
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Testimonial</label>
-                <textarea className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" rows={4} placeholder="Your feedback..." />
+                <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
+                <input 
+                  type="tel" 
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  placeholder="+1 (555) 123-4567" 
+                />
               </div>
-              <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-semibold transition-all">Submit</button>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Testimonial *</label>
+                <textarea 
+                  name="testimonial"
+                  value={formData.testimonial}
+                  onChange={handleInputChange}
+                  className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  rows={4} 
+                  placeholder="Your feedback..." 
+                  required
+                />
+              </div>
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-2 rounded font-semibold transition-all flex items-center justify-center"
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Submitting...
+                  </>
+                ) : (
+                  'Submit Feedback'
+                )}
+              </button>
             </form>
           </div>
         </div>
@@ -147,19 +274,27 @@ export default function HomePage() {
           <img src="/logo.png" alt="Logo" className="w-20 h-20 sm:w-32 sm:h-32 mb-4 sm:mb-6 mx-auto drop-shadow-xl rounded-full  p-2" />
           <div className="max-w-2xl sm:max-w-6xl mx-auto text-center">
             <div className="mb-4 sm:mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <Badge className="bg-[#52C5D0]/20 text-[#52C5D0] border-[#52C5D0]/30 text-base sm:text-lg px-4 sm:px-6 py-2 mb-4 sm:mb-6">
+              <Badge className="bg-gradient-to-r from-[#FF6B35] to-[#F7931E] text-white border-[#FF6B35]/30 text-base sm:text-lg px-4 sm:px-6 py-2 mb-4 sm:mb-6 shadow-lg">
                 Trusted Worldwide • USA • Canada • UK • Australia
               </Badge>
             </div>
 
             <h1
-              className="text-3xl xs:text-4xl sm:text-6xl md:text-8xl font-black mb-4 sm:mb-8 leading-tight animate-fade-in-up"
-              style={{ animationDelay: "0.4s" }}
+              className="text-3xl xs:text-4xl sm:text-6xl md:text-8xl font-black mb-4 sm:mb-8 leading-tight animate-fade-in-up text-white"
+              style={{ 
+                animationDelay: "0.4s",
+                textShadow: `
+                  -1px -1px 0 #52C5D0,
+                  1px -1px 0 #52C5D0,
+                  -1px 1px 0 #52C5D0,
+                  1px 1px 0 #52C5D0
+                `
+              }}
             >
-              <span className="inline bg-gradient-to-r from-white via-[#52C5D0] to-white bg-clip-text text-transparent">
+              <span className="inline">
                 The Value
               </span>
-              <span className="inline text-[#52C5D0] transform -skew-x-6 ml-2">Engineering</span>
+              <span className="inline transform -skew-x-6 ml-2">Engineering</span>
             </h1>
 
             {/* Rotating Taglines */}
@@ -205,11 +340,12 @@ export default function HomePage() {
       </section>
 
       {/* Who We Are Section with Advanced Animations */}
+      {/* Who We Are Section with Advanced Animations */}
       <section
         id="about"
         ref={aboutRef}
         className="py-32 relative overflow-hidden z-30"
-        style={{ background: 'linear-gradient(to bottom, #10151A 0%, #1e3a8a 100%)', color: '#52C5D0' }}
+        style={{ background: 'linear-gradient(to bottom, #10151A 0%, #1e3a8a 100%)' }}
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -230,14 +366,14 @@ export default function HomePage() {
                 }`}
               >
                 <div className="mb-8">
-                  <Badge className="bg-[#52C5D0]/20 text-[#52C5D0] text-sm px-4 py-2 mb-6">Who We Are</Badge>
-                  <h2 className="text-5xl md:text-6xl font-black mb-8 leading-tight" style={{ color: '#52C5D0' }}>
+                  <Badge className="bg-[#52C5D0]/20 text-[#fff] text-sm px-4 py-2 mb-6">Who We Are</Badge>
+                  <h2 className="text-5xl md:text-6xl font-black mb-8 leading-tight text-white">
                     Trusted Estimating Partner for
                     <span className="block text-[#52C5D0] transform skew-x-3">Modern Construction</span>
                   </h2>
                 </div>
 
-                <div className="space-y-6 text-lg leading-relaxed" style={{ color: '#52C5D0' }}>
+                <div className="space-y-6 text-lg leading-relaxed text-gray-200">
                   <p>
                     At The Value Engineering, we bridge the gap between precision and performance. We're not just a team
                     of estimators - we're construction professionals who understand how real-world building decisions
@@ -297,7 +433,7 @@ export default function HomePage() {
                       >
                         <CardContent className="p-8 text-center">
                           <div className="text-4xl font-black text-[#52C5D0] mb-3">{stat.number}</div>
-                          <div className="text-sm font-medium text-[#52C5D0] uppercase tracking-wider">
+                          <div className="text-sm font-medium text-gray-300 uppercase tracking-wider">
                             {stat.label}
                           </div>
                         </CardContent>
