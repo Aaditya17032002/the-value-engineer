@@ -103,21 +103,21 @@ export default function FAQPage() {
     <div
       className={`min-h-screen pt-20 transition-all duration-1000 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
-      }`}
+      } bg-gradient-to-b from-[#10151A] via-black/90 to-transparent text-[#52C5D0]`}
     >
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-16 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-[#10151A] via-black/90 to-transparent text-[#52C5D0] py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
         <div className="container mx-auto px-6 relative">
           <div className="max-w-3xl mx-auto text-center">
-            <Badge className="bg-blue-600/20 text-blue-200 border-blue-400/30 text-base px-4 py-2 mb-4 font-normal rounded">
+            <Badge className="bg-[#52C5D0]/20 text-[#52C5D0] border-[#52C5D0]/30 text-base px-4 py-2 mb-4 font-normal rounded">
               Frequently Asked Questions
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
               Frequently Asked
-              <span className="block text-blue-400">Questions</span>
+              <span className="block text-[#52C5D0]">Questions</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl mx-auto text-justify">
+            <p className="text-lg md:text-xl text-[#52C5D0] leading-relaxed max-w-2xl mx-auto text-justify">
               Find answers to common questions about our estimating services, process, and how to get started.
             </p>
           </div>
@@ -125,25 +125,25 @@ export default function FAQPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-32 bg-white">
+      <section className="py-32 bg-transparent">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <div className="space-y-4">
               {faqs.map((faq, index) => (
                 <Card
                   key={index}
-                  className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="bg-[#10151A]/80 border border-[#52C5D0] shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
                 >
                   <CardContent className="p-0">
                     <button
                       onClick={() => toggleItem(index)}
-                      className="w-full p-8 text-left flex items-center justify-between hover:bg-slate-50 transition-colors duration-200"
+                      className="w-full p-8 text-left flex items-center justify-between hover:bg-[#10151A]/60 transition-colors duration-200"
                     >
-                      <h3 className="text-lg font-semibold text-slate-800 pr-4">{faq.question}</h3>
+                      <h3 className="text-lg font-semibold text-[#52C5D0] pr-4">{faq.question}</h3>
                       {openItems.has(index) ? (
-                        <ChevronUp className="h-6 w-6 text-blue-600 flex-shrink-0" />
+                        <ChevronUp className="h-6 w-6 text-[#52C5D0] flex-shrink-0" />
                       ) : (
-                        <ChevronDown className="h-6 w-6 text-slate-400 flex-shrink-0" />
+                        <ChevronDown className="h-6 w-6 text-[#52C5D0]/60 flex-shrink-0" />
                       )}
                     </button>
 
@@ -153,8 +153,8 @@ export default function FAQPage() {
                       } overflow-hidden`}
                     >
                       <div className="px-8 pb-8">
-                        <div className="border-t border-slate-200 pt-6">
-                          <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
+                        <div className="border-t border-[#52C5D0]/30 pt-6">
+                          <p className="text-[#52C5D0] leading-relaxed">{faq.answer}</p>
                         </div>
                       </div>
                     </div>
@@ -167,13 +167,13 @@ export default function FAQPage() {
       </section>
 
       {/* Still Have Questions Section */}
-      <section className="py-32 bg-gradient-to-br from-slate-50 to-blue-50">
+      <section className="py-32 bg-gradient-to-br from-[#10151A] via-black/90 to-transparent text-[#52C5D0]">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-12">
-              <MessageCircle className="h-16 w-16 text-blue-600 mx-auto mb-6" />
-              <h2 className="text-4xl font-black text-slate-800 mb-6">Still Have Questions?</h2>
-              <p className="text-xl text-slate-600 leading-relaxed">
+              <MessageCircle className="h-16 w-16 text-[#52C5D0] mx-auto mb-6" />
+              <h2 className="text-4xl font-black text-[#52C5D0] mb-6">Still Have Questions?</h2>
+              <p className="text-xl text-[#52C5D0] leading-relaxed">
                 Can't find what you're looking for? We're here to help with any specific questions about your project.
               </p>
             </div>
@@ -181,7 +181,7 @@ export default function FAQPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-300"
+                className="bg-[#52C5D0] hover:bg-[#3bb6c2] text-[#10151A] px-8 py-4 text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-300"
                 asChild
               >
                 <Link href="/contact">Contact Us</Link>
@@ -189,7 +189,7 @@ export default function FAQPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 bg-transparent"
+                className="border-2 border-[#52C5D0] text-[#52C5D0] hover:bg-[#10151A] px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 bg-transparent"
                 asChild
               >
                 <Link href="/services">View Services</Link>

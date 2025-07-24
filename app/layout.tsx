@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 function Footer() {
   return (
-    <footer className="w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-6 mt-12">
+    <footer className="w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-6 ">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="text-sm text-gray-300">© {new Date().getFullYear()} The Value Engineering. All rights reserved.</div>
         <div className="flex space-x-4 text-2xl">
@@ -51,11 +51,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navigation />
-        {children}
-        <Footer />
-        <WhatsAppFloatingButton />
+      <body className={inter.className + " relative min-h-screen"}>
+        {/* Fixed background video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="fixed top-0 left-0 w-full h-full object-cover z-0 pointer-events-none select-none bg-black"
+          style={{ minHeight: '100vh', minWidth: '100vw' }}
+        >
+          <source src="/bg.mp4" type="video/mp4" />
+        </video>
+        {/* Content wrapper to ensure stacking above video */}
+        <div className="relative z-10">
+          <Navigation />
+          {children}
+          <Footer />
+          <WhatsAppFloatingButton />
+        </div>
       </body>
     </html>
   )

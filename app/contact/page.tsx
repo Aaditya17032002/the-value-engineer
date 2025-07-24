@@ -76,19 +76,19 @@ export default function ContactPage() {
     <div
       className={`min-h-screen pt-20 transition-all duration-1000 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
-      }`}
+      } bg-gradient-to-b from-[#10151A] via-black/90 to-transparent text-[#52C5D0]`}
     >
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-16 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-[#10151A] via-black/90 to-transparent text-[#52C5D0] py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
         <div className="container mx-auto px-6 relative">
           <div className="max-w-3xl mx-auto text-center">
-            <Badge className="bg-blue-600/20 text-blue-200 border-blue-400/30 text-base px-4 py-2 mb-4 font-normal rounded">
+            <Badge className="bg-[#52C5D0]/20 text-[#52C5D0] border-[#52C5D0]/30 text-base px-4 py-2 mb-4 font-normal rounded">
               Contact Us
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
               Get In Touch
-              <span className="block text-blue-400">We're Here to Help</span>
+              <span className="block text-[#52C5D0]">We're Here to Help</span>
             </h1>
             {/* <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl mx-auto text-justify">
               📞 Call Me Directly – [Your Name / Number here]<br />
@@ -102,26 +102,26 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Methods */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-transparent">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-4 mb-10">
               {contactMethods.map((method, index) => (
                 <Card
                   key={index}
-                  className="border-0 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group rounded-xl"
+                  className="bg-[#10151A]/80 border border-[#52C5D0] shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group rounded-xl"
                 >
                   <CardContent className="p-6 text-left">
                     <div className="mb-4 relative flex items-center">
                       <div
-                        className={`w-12 h-12 bg-gradient-to-br ${method.color} rounded-xl flex items-center justify-center shadow group-hover:scale-105 transition-transform duration-200`}
+                        className={`w-12 h-12 bg-gradient-to-br from-[#52C5D0] to-[#10151A] rounded-xl flex items-center justify-center shadow group-hover:scale-105 transition-transform duration-200`}
                       >
-                        <method.icon className="h-6 w-6 text-white" />
+                        <method.icon className="h-6 w-6 text-[#10151A]" />
                       </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-slate-800 mb-2">{method.title}</h3>
+                    <h3 className="text-lg font-semibold text-[#52C5D0] mb-2">{method.title}</h3>
                     {method.details.map((detail, detailIndex) => (
-                      <p key={detailIndex} className="text-slate-600 text-sm leading-relaxed mb-1">
+                      <p key={detailIndex} className="text-[#52C5D0] text-sm leading-relaxed mb-1">
                         {detail}
                       </p>
                     ))}
@@ -134,52 +134,52 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form */}
-      <section className="py-12 bg-gradient-to-br from-slate-50 to-blue-50">
+      <section className="py-12 bg-transparent">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto">
             <div className="text-left mb-8">
-              <Badge className="bg-blue-100 text-blue-800 text-base px-3 py-1 mb-3 font-normal rounded">Free Sample Request</Badge>
-              <h2 className="text-3xl font-bold text-slate-800 mb-4">Get Your Free Sample</h2>
-              <p className="text-base text-slate-600 max-w-2xl text-justify">
+              <Badge className="bg-[#52C5D0]/20 text-[#52C5D0] text-base px-3 py-1 mb-3 font-normal rounded">Free Sample Request</Badge>
+              <h2 className="text-3xl font-bold text-[#52C5D0] mb-4">Get Your Free Sample</h2>
+              <p className="text-base text-[#52C5D0] max-w-2xl text-justify">
                 Send us your project details and we'll provide a no-cost sample takeoff to demonstrate our quality.
               </p>
             </div>
 
-            <Card className="border border-slate-200 shadow bg-white rounded-xl">
+            <Card className="border border-[#52C5D0] shadow bg-[#10151A]/80 rounded-xl">
               <CardHeader className="text-left pb-4">
-                <CardTitle className="text-xl text-slate-800 font-semibold">Project Information</CardTitle>
-                <p className="text-slate-600 text-sm">Tell us about your project and we'll get back to you within 24 hours.</p>
+                <CardTitle className="text-xl text-[#52C5D0] font-semibold">Project Information</CardTitle>
+                <p className="text-[#52C5D0] text-sm">Tell us about your project and we'll get back to you within 24 hours.</p>
               </CardHeader>
               <CardContent className="p-6">
                 <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="firstName" className="text-sm font-semibold text-slate-700 mb-2 block">
+                      <Label htmlFor="firstName" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                         First Name *
                       </Label>
                       <Input
                         id="firstName"
                         placeholder="John"
                         required
-                        className="h-12 border-slate-300 focus:border-blue-500"
+                        className="h-12 border-[#52C5D0]/40 focus:border-[#52C5D0] text-[#52C5D0] bg-transparent"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="lastName" className="text-sm font-semibold text-slate-700 mb-2 block">
+                      <Label htmlFor="lastName" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                         Last Name *
                       </Label>
                       <Input
                         id="lastName"
                         placeholder="Doe"
                         required
-                        className="h-12 border-slate-300 focus:border-blue-500"
+                        className="h-12 border-[#52C5D0]/40 focus:border-[#52C5D0] text-[#52C5D0] bg-transparent"
                       />
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="email" className="text-sm font-semibold text-slate-700 mb-2 block">
+                      <Label htmlFor="email" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                         Email Address *
                       </Label>
                       <Input
@@ -187,105 +187,101 @@ export default function ContactPage() {
                         type="email"
                         placeholder="john@company.com"
                         required
-                        className="h-12 border-slate-300 focus:border-blue-500"
+                        className="h-12 border-[#52C5D0]/40 focus:border-[#52C5D0] text-[#52C5D0] bg-transparent"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone" className="text-sm font-semibold text-slate-700 mb-2 block">
+                      <Label htmlFor="phone" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                         Phone Number
                       </Label>
                       <Input
                         id="phone"
                         type="tel"
                         placeholder="+1 (555) 123-4567"
-                        className="h-12 border-slate-300 focus:border-blue-500"
+                        className="h-12 border-[#52C5D0]/40 focus:border-[#52C5D0] text-[#52C5D0] bg-transparent"
                       />
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="company" className="text-sm font-semibold text-slate-700 mb-2 block">
+                      <Label htmlFor="company" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                         Company Name
                       </Label>
                       <Input
                         id="company"
                         placeholder="Your Company"
-                        className="h-12 border-slate-300 focus:border-blue-500"
+                        className="h-12 border-[#52C5D0]/40 focus:border-[#52C5D0] text-[#52C5D0] bg-transparent"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="location" className="text-sm font-semibold text-slate-700 mb-2 block">
+                      <Label htmlFor="location" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                         Project Location
                       </Label>
                       <Input
                         id="location"
                         placeholder="City, State/Province"
-                        className="h-12 border-slate-300 focus:border-blue-500"
+                        className="h-12 border-[#52C5D0]/40 focus:border-[#52C5D0] text-[#52C5D0] bg-transparent"
                       />
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="projectType" className="text-sm font-semibold text-slate-700 mb-2 block">
+                      <Label htmlFor="projectType" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                         Project Type *
                       </Label>
                       <select
                         id="projectType"
-                        className="w-full h-12 px-4 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full h-12 px-4 border border-[#52C5D0]/40 rounded-md focus:outline-none focus:ring-2 focus:ring-[#52C5D0] focus:border-[#52C5D0] text-[#52C5D0] bg-transparent"
                         required
                       >
                         <option value="">Select project type</option>
                         {projectTypes.map((type) => (
-                          <option key={type} value={type.toLowerCase().replace(/\s+/g, "-")}>
-                            {type}
-                          </option>
+                          <option key={type} value={type.toLowerCase().replace(/\s+/g, "-")}> {type} </option>
                         ))}
                       </select>
                     </div>
                     <div>
-                      <Label htmlFor="budget" className="text-sm font-semibold text-slate-700 mb-2 block">
+                      <Label htmlFor="budget" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                         Estimated Budget
                       </Label>
                       <select
                         id="budget"
-                        className="w-full h-12 px-4 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full h-12 px-4 border border-[#52C5D0]/40 rounded-md focus:outline-none focus:ring-2 focus:ring-[#52C5D0] focus:border-[#52C5D0] text-[#52C5D0] bg-transparent"
                       >
                         <option value="">Select budget range</option>
                         {budgetRanges.map((range) => (
-                          <option key={range} value={range.toLowerCase().replace(/\s+/g, "-")}>
-                            {range}
-                          </option>
+                          <option key={range} value={range.toLowerCase().replace(/\s+/g, "-")}> {range} </option>
                         ))}
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="trades" className="text-sm font-semibold text-slate-700 mb-2 block">
+                    <Label htmlFor="trades" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                       Trades Needed
                     </Label>
                     <Input
                       id="trades"
                       placeholder="e.g., Drywall, Flooring, Electrical, HVAC"
-                      className="h-12 border-slate-300 focus:border-blue-500"
+                      className="h-12 border-[#52C5D0]/40 focus:border-[#52C5D0] text-[#52C5D0] bg-transparent"
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="timeline" className="text-sm font-semibold text-slate-700 mb-2 block">
+                    <Label htmlFor="timeline" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                       Project Timeline
                     </Label>
                     <Input
                       id="timeline"
                       placeholder="When do you need the estimate?"
-                      className="h-12 border-slate-300 focus:border-blue-500"
+                      className="h-12 border-[#52C5D0]/40 focus:border-[#52C5D0] text-[#52C5D0] bg-transparent"
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="message" className="text-sm font-semibold text-slate-700 mb-2 block">
+                    <Label htmlFor="message" className="text-sm font-semibold text-[#52C5D0] mb-2 block">
                       Project Details *
                     </Label>
                     <Textarea
@@ -293,12 +289,12 @@ export default function ContactPage() {
                       placeholder="Please describe your project requirements, any specific formatting needs, software preferences, and what you'd like included in the free sample..."
                       rows={6}
                       required
-                      className="border-slate-300 focus:border-blue-500 resize-none"
+                      className="border-[#52C5D0]/40 focus:border-[#52C5D0] text-[#52C5D0] bg-transparent resize-none"
                     />
                   </div>
 
-                  <div className="bg-blue-50 p-6 rounded-xl">
-                    <h4 className="font-semibold text-slate-800 mb-3">What You'll Receive:</h4>
+                  <div className="bg-[#52C5D0]/10 p-6 rounded-xl">
+                    <h4 className="font-semibold text-[#52C5D0] mb-3">What You'll Receive:</h4>
                     <div className="grid md:grid-cols-2 gap-3">
                       {[
                         "Free sample takeoff",
@@ -309,8 +305,8 @@ export default function ContactPage() {
                         "Workflow consultation",
                       ].map((benefit, index) => (
                         <div key={index} className="flex items-center space-x-2">
-                          <CheckCircle className="h-4 w-4 text-green-500" />
-                          <span className="text-sm text-slate-700">{benefit}</span>
+                          <CheckCircle className="h-4 w-4 text-[#52C5D0]" />
+                          <span className="text-sm text-[#52C5D0]">{benefit}</span>
                         </div>
                       ))}
                     </div>
@@ -318,7 +314,7 @@ export default function ContactPage() {
 
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                    className="w-full bg-[#52C5D0] hover:bg-[#3bb6c2] text-[#10151A] text-lg py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                     disabled={isSubmitted}
                   >
                     {isSubmitted ? (

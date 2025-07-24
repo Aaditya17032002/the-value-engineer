@@ -9,11 +9,9 @@ import Link from "next/link"
 import { FaWhatsapp } from "react-icons/fa"
 
 export default function HomePage() {
-  const videoRef = useRef<HTMLVideoElement>(null)
   const heroRef = useRef<HTMLDivElement>(null)
   const aboutRef = useRef<HTMLDivElement>(null)
   const advantagesRef = useRef<HTMLDivElement>(null)
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true)
   const [scrollY, setScrollY] = useState(0)
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
   const [showFeedback, setShowFeedback] = useState(false)
@@ -55,17 +53,6 @@ export default function HomePage() {
     }, 2600); // 1600ms for a slower, more readable animation
     return () => clearInterval(interval);
   }, [taglines.length]);
-
-  const toggleVideo = () => {
-    if (videoRef.current) {
-      if (isVideoPlaying) {
-        videoRef.current.pause()
-      } else {
-        videoRef.current.play()
-      }
-      setIsVideoPlaying(!isVideoPlaying)
-    }
-  }
 
   const advantages = [
     { icon: Target, title: "Custom Estimating Support", desc: "Designed to fit your workflow" },
@@ -135,19 +122,15 @@ export default function HomePage() {
       </a>
       {/* Hero Section with Advanced Parallax */}
       <section ref={heroRef} className="relative h-[70vh] sm:h-screen transition-all duration-700 flex items-center justify-center px-2 sm:px-0">
-        <div className="absolute inset-0 will-change-transform" style={{ transform: `translateY(${scrollY * 0.5}px)` }}>
-          <video ref={videoRef} autoPlay muted loop playsInline className="w-full h-full object-cover scale-110">
-            <source src="/bg.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-slate-800/90" />
-        </div>
+        {/* Gradient overlay for readability over video background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#10151A]/80 via-[#1e3a8a]/40 to-[#10151A]/90 z-0" />
 
         {/* Floating Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(6)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-2 h-2 bg-blue-400/30 rounded-full animate-pulse"
+              className="absolute w-2 h-2 bg-[#52C5D0]/30 rounded-full animate-pulse"
               style={{
                 left: `${20 + i * 15}%`,
                 top: `${30 + i * 10}%`,
@@ -161,10 +144,10 @@ export default function HomePage() {
         {/* Hero Content with Staggered Animation */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full h-full text-white px-2 sm:px-6">
           {/* Logo */}
-          <img src="/logo.png" alt="Logo" className="w-20 h-20 sm:w-32 sm:h-32 mb-4 sm:mb-6 mx-auto drop-shadow-xl rounded-full bg-white/80 p-2" />
+          <img src="/logo.png" alt="Logo" className="w-20 h-20 sm:w-32 sm:h-32 mb-4 sm:mb-6 mx-auto drop-shadow-xl rounded-full  p-2" />
           <div className="max-w-2xl sm:max-w-6xl mx-auto text-center">
             <div className="mb-4 sm:mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <Badge className="bg-blue-600/20 text-blue-200 border-blue-400/30 text-base sm:text-lg px-4 sm:px-6 py-2 mb-4 sm:mb-6">
+              <Badge className="bg-[#52C5D0]/20 text-[#52C5D0] border-[#52C5D0]/30 text-base sm:text-lg px-4 sm:px-6 py-2 mb-4 sm:mb-6">
                 Trusted Worldwide • USA • Canada • UK • Australia
               </Badge>
             </div>
@@ -173,10 +156,10 @@ export default function HomePage() {
               className="text-3xl xs:text-4xl sm:text-6xl md:text-8xl font-black mb-4 sm:mb-8 leading-tight animate-fade-in-up"
               style={{ animationDelay: "0.4s" }}
             >
-              <span className="inline bg-gradient-to-r from-white via-blue-200 to-white bg-clip-text text-transparent">
+              <span className="inline bg-gradient-to-r from-white via-[#52C5D0] to-white bg-clip-text text-transparent">
                 The Value
               </span>
-              <span className="inline text-blue-400 transform -skew-x-6 ml-2">Engineering</span>
+              <span className="inline text-[#52C5D0] transform -skew-x-6 ml-2">Engineering</span>
             </h1>
 
             {/* Rotating Taglines */}
@@ -197,7 +180,7 @@ export default function HomePage() {
             >
               <Button
                 size="lg"
-                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 group"
+                className="w-full sm:w-auto bg-[#52C5D0] hover:bg-[#3bb6c2] text-white px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 group"
                 asChild
               >
                 <Link href="/contact">
@@ -205,16 +188,7 @@ export default function HomePage() {
                   <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
                 </Link>
               </Button>
-
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={toggleVideo}
-                className="w-full sm:w-auto border-2 border-white/30 text-white hover:bg-white/10 px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-bold rounded-full backdrop-blur-sm transition-all duration-300 bg-transparent"
-              >
-                {isVideoPlaying ? <Pause className="mr-3 h-6 w-6" /> : <Play className="mr-3 h-6 w-6" />}
-                {isVideoPlaying ? "Pause" : "Play"}
-              </Button>
+              {/* Play/Pause button removed since video is now global and always playing */}
             </div>
           </div>
         </div>
@@ -234,7 +208,8 @@ export default function HomePage() {
       <section
         id="about"
         ref={aboutRef}
-        className="py-32 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden z-30"
+        className="py-32 relative overflow-hidden z-30"
+        style={{ background: 'linear-gradient(to bottom, #10151A 0%, #1e3a8a 100%)', color: '#52C5D0' }}
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -255,14 +230,14 @@ export default function HomePage() {
                 }`}
               >
                 <div className="mb-8">
-                  <Badge className="bg-blue-100 text-blue-800 text-sm px-4 py-2 mb-6">Who We Are</Badge>
-                  <h2 className="text-5xl md:text-6xl font-black text-slate-800 mb-8 leading-tight">
+                  <Badge className="bg-[#52C5D0]/20 text-[#52C5D0] text-sm px-4 py-2 mb-6">Who We Are</Badge>
+                  <h2 className="text-5xl md:text-6xl font-black mb-8 leading-tight" style={{ color: '#52C5D0' }}>
                     Trusted Estimating Partner for
-                    <span className="block text-blue-600 transform skew-x-3">Modern Construction</span>
+                    <span className="block text-[#52C5D0] transform skew-x-3">Modern Construction</span>
                   </h2>
                 </div>
 
-                <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
+                <div className="space-y-6 text-lg leading-relaxed" style={{ color: '#52C5D0' }}>
                   <p>
                     At The Value Engineering, we bridge the gap between precision and performance. We're not just a team
                     of estimators - we're construction professionals who understand how real-world building decisions
@@ -282,7 +257,7 @@ export default function HomePage() {
                 <div className="mt-12 flex flex-col sm:flex-row gap-4">
                   <Button
                     size="lg"
-                    className="bg-slate-800 hover:bg-slate-900 text-white px-8 py-4 text-lg font-semibold rounded-full group"
+                    className="bg-slate-800 hover:bg-slate-900 text-[#52C5D0] px-8 py-4 text-lg font-semibold rounded-full group border border-[#52C5D0]"
                     asChild
                   >
                     <Link href="/about">
@@ -293,7 +268,7 @@ export default function HomePage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 px-8 py-4 text-lg font-semibold rounded-full bg-transparent"
+                    className="border-2 border-[#52C5D0] text-[#52C5D0] hover:bg-[#10151A] px-8 py-4 text-lg font-semibold rounded-full bg-transparent"
                     asChild
                   >
                     <Link href="/services">View Services</Link>
@@ -317,12 +292,12 @@ export default function HomePage() {
                     ].map((stat, index) => (
                       <Card
                         key={index}
-                        className="bg-white/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                        className="bg-[#10151A]/80 backdrop-blur-sm border border-[#52C5D0] shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
                         style={{ animationDelay: stat.delay }}
                       >
                         <CardContent className="p-8 text-center">
-                          <div className="text-4xl font-black text-blue-600 mb-3">{stat.number}</div>
-                          <div className="text-sm font-medium text-slate-600 uppercase tracking-wider">
+                          <div className="text-4xl font-black text-[#52C5D0] mb-3">{stat.number}</div>
+                          <div className="text-sm font-medium text-[#52C5D0] uppercase tracking-wider">
                             {stat.label}
                           </div>
                         </CardContent>
@@ -331,8 +306,8 @@ export default function HomePage() {
                   </div>
 
                   {/* Decorative Elements */}
-                  <div className="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-transparent rounded-full blur-xl" />
-                  <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-gradient-to-br from-slate-400/20 to-transparent rounded-full blur-xl" />
+                  <div className="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-[#52C5D0]/20 to-transparent rounded-full blur-xl" />
+                  <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-gradient-to-br from-[#52C5D0]/20 to-transparent rounded-full blur-xl" />
                 </div>
               </div>
             </div>
